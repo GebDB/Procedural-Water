@@ -59,6 +59,8 @@ uniform float amplitude;
 uniform float frequency;     
 const float PI = 3.141592;
 
+
+
 void main() {
     // Compute FBM-based displacement
     vec3 worldPosition = aPos;
@@ -68,6 +70,7 @@ void main() {
     // Apply displacement
     vec3 totalDisplacement = vec3(0.0, amplitude * fbmValue, 0.0);
     vec3 animatedPos = worldPosition + totalDisplacement;
+
 
     // Compute world-space position
     FragPos = vec3(model * vec4(animatedPos, 1.0));

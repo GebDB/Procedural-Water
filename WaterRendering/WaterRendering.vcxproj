@@ -36,6 +36,8 @@
     <ClCompile Include="texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="cubemap.fs" />
+    <None Include="cubemap.vs" />
     <None Include="light.fs" />
     <None Include="light.vs" />
     <None Include="skybox.fs" />

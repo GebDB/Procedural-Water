@@ -79,6 +79,12 @@
     <None Include="skybox.vs">
       <Filter>Source Files\shaders</Filter>
     </None>
+    <None Include="cubemap.vs">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="cubemap.fs">
+      <Filter>Source Files\shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\SBS - Tiny Texture Pack 2 - 128x128\128x128\Brick\Brick_06-128x128.png">
