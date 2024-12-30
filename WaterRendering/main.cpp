@@ -122,6 +122,7 @@ int main()
     // skybox shader
     backgroundShader.Use();
     backgroundShader.SetInteger("environmentMap", 0);
+    unsigned int resolution = 2048;
 
     // pbr: setup framebuffer
     unsigned int captureFBO;
@@ -131,7 +132,7 @@ int main()
 
     glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
     glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, 512, 512);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, resolution, resolution);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, captureRBO);
     
     // load the HDR environment map
@@ -164,7 +165,7 @@ int main()
     glBindTexture(GL_TEXTURE_CUBE_MAP, envCubemap);
     for (unsigned int i = 0; i < 6; ++i)
     {
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB16F, 512, 512, 0, GL_RGB, GL_FLOAT, nullptr);
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB16F, resolution, resolution, 0, GL_RGB, GL_FLOAT, nullptr);
     }
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -191,7 +192,7 @@ int main()
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, hdrTexture);
 
-    glViewport(0, 0, 512, 512); // don't forget to configure the viewport to the capture dimensions.
+    glViewport(0, 0, resolution, resolution); // don't forget to configure the viewport to the capture dimensions.
     glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
     for (unsigned int i = 0; i < 6; ++i)
     {
@@ -226,7 +227,7 @@ int main()
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::scale(model, glm::vec3(114.0f, 1.0f, 114.0f));
 
-    float time = glfwGetTime();
+    float time = (float)glfwGetTime();
     // Render loop
     while (!glfwWindowShouldClose(window)) {
         // Per-frame timing
@@ -243,7 +244,7 @@ int main()
 
         // Set uniforms
         glm::mat4 view = camera.GetViewMatrix();
-        time = glfwGetTime();
+        time = (float)glfwGetTime();
         glm::vec3 cameraPos = glm::vec3(glm::inverse(view)[3]);
 
 
